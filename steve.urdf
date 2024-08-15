@@ -1,0 +1,78 @@
+<robot name="steve">
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0.028" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.056" radius="0.048"/>
+            </geometry>
+        </visual> 
+    </link>
+
+    <link name="steve_stub_link">
+        <visual>
+            <origin xyz="0 0 0.0265" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.05 0.05 0.053" />
+            </geometry>
+        </visual> 
+    </link>
+    
+    <joint name="base_joint" type="revolute">
+        <parent link="base_link"/>
+        <child link="steve_stub_link"/>
+        <origin xyz="0 0 0.084" rpy="0 0 0" />
+        <axis xyz="0 0 -1"/>
+    </joint>
+    
+    <link name="steve_arm1_link">
+        <visual>
+            <origin xyz="0 0 0.0315" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="0.063" radius="0.01"/>
+            </geometry>
+        </visual> 
+    </link>
+    
+    <joint name="stub_joint" type="revolute">
+        <parent link="steve_stub_link"/>
+        <child link="steve_arm1_link"/>
+        <origin xyz="0 0 0.053" rpy="0 0 0" />
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.57" upper="1.57" />
+    </joint>
+    
+    <link name="steve_arm2_link">
+        <visual>
+            <origin xyz="0 0 0.0315" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="0.063" radius="0.01"/>
+            </geometry>
+        </visual> 
+    </link>
+    
+    <joint name="elbow_joint" type="revolute">
+        <parent link="steve_arm1_link"/>
+        <child link="steve_arm2_link"/>
+        <origin xyz="0 0 0.063" rpy="0 0 0" />
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.92" upper="1.92" />
+    </joint>
+    
+    <link name="end_effector_link">
+        <visual>
+            <origin xyz="0 0 0.0215" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="0.063" radius="0.01"/>
+            </geometry>
+        </visual> 
+    </link>
+    
+    <joint name="end_joint" type="revolute">
+        <parent link="steve_arm2_link"/>
+        <child link="end_effector_link"/>
+        <origin xyz="0 0 0.063" rpy="0 0 0" />
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.92" upper="1.92" />       
+    </joint>
+    
+</robot>
